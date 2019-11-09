@@ -26,6 +26,7 @@ public class PlayerMove : MonoBehaviour
         x = rotationModuleOn ? Input.GetAxis("Horizontal") : 0;
         y = rotationModuleOn ? Input.GetAxis("Vertical") : 0;
         drive = translationModuleOn ? Input.GetAxis("Drive") : 0;
+        Debug.Log(drive);
 
         if (drive != 0)
             isMoving = true;
