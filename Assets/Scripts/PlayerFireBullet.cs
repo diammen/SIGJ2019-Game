@@ -7,6 +7,7 @@ public class PlayerFireBullet : MonoBehaviour
     public GameObject bullet;
     public Transform spawner;
     public float bulletSpeed;
+  //  private bool canThrow = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class PlayerFireBullet : MonoBehaviour
         {
             GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
             spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
+            bullet = null;
         }
 
     }
