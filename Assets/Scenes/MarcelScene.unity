@@ -126,6 +126,38 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 657904594682955587}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &138267057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138267056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbfdab0d6e1c92c409c89ab7bf67667a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  spawner: {fileID: 1083972205}
+  throwforce: 3
+  canThrow: 1
+--- !u!114 &138267058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138267056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7598220c91d551741b1d2a45a6dc75dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  rotationSpeed: 7
+  translationModuleOn: 0
+  rotationModuleOn: 0
 --- !u!4 &138267059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 188849321893232956, guid: 5b157a960d6edb341805c9fd9522477f,
@@ -371,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661016919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -32}
+  m_LocalPosition: {x: 0, y: 0.5, z: -38.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -804,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1367194837}
-  offset: {x: 0, y: 2, z: -4}
+  offset: {x: 0, y: 5, z: 0}
   smoothTime: 0.1
   rotationSpeed: 1
 --- !u!95 &1367170605
@@ -1519,4 +1551,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 885688586472489237, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
     - {fileID: 657904593821606591, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+    - {fileID: 1726321805, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+    - {fileID: 1726321810, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
