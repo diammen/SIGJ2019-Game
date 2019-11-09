@@ -23,10 +23,23 @@ public class PlayerFireBullet : MonoBehaviour
         //Release the button and fire
         if (bullet != null && Input.GetAxis("Throw") > 0.5)
         {
+            bullet.gameObject.SetActive(true);
             GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
+            
             spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
+            Destroy(bullet);
             bullet = null;
         }
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!bullet && collision.gameObject.tag == "PickUp")
+        {
+            bullet = collision.gameObject;
+
+            collision.gameObject.SetActive(false);
+            
+        }
     }
 }
