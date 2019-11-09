@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFireBullet : MonoBehaviour
+public class PlayerThrow : MonoBehaviour
 {
     public GameObject bullet;
     public Transform spawner;
-    public float bulletSpeed;
+    public float throwforce;
     public bool canThrow = true;
   //  private bool canThrow = true;
 
@@ -26,10 +26,14 @@ public class PlayerFireBullet : MonoBehaviour
             if (bullet != null && Input.GetAxis("Throw") > 0.5)
             {
                 bullet.gameObject.SetActive(true);
-                GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
-
-                spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
-                Destroy(bullet);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * throwforce, ForceMode.Impulse);
+                bullet.transform.parent = null;
+                bullet = null;
+            }
+            if (bullet != null && Input.GetButtonDown("Drop"))
+            {
+                bullet.gameObject.SetActive(true);
+                bullet.transform.parent = null;
                 bullet = null;
             }
         }
@@ -42,6 +46,10 @@ public class PlayerFireBullet : MonoBehaviour
             if (!bullet && collision.gameObject.tag == "PickUp")
             {
                 bullet = collision.gameObject;
+                bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                bullet.transform.parent = transform;
+                bullet.transform.position = spawner.position;
+                bullet.transform.rotation = spawner.rotation;
 
                 collision.gameObject.SetActive(false);
 

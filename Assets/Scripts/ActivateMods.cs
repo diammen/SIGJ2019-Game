@@ -18,7 +18,7 @@ public class ActivateMods : MonoBehaviour
             }
             else if(collision.gameObject.name == "ActivateThrow")
             {
-                GetComponent<PlayerFireBullet>().canThrow = true;
+                GetComponent<PlayerThrow>().canThrow = true;
             }
             Destroy(collision.gameObject);
         }
