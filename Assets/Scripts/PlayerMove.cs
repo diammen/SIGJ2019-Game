@@ -40,10 +40,8 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (moveSoundSource.isPlaying)
-            {
-                StartCoroutine(soundFadeout());
-            }
+            moveSoundSource.Stop();
+
             isMoving = false;
         }
     }
@@ -72,7 +70,7 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator moveSoundSequence()
     {
-        moveSoundSource.volume = 0.5f;
+        moveSoundSource.volume = 1;
         moveSoundSource.PlayOneShot(startMoveSound);
         yield return new WaitForSeconds(startMoveSound.length);
         moveSoundSource.Play();
