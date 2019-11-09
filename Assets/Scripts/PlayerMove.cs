@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public AudioSource moveSoundSource;
+    public AudioClip startMoveSound;
+    public AudioClip loopMoveSound;
     public float moveSpeed;
     public float rotationSpeed;
     public bool translationModuleOn;
@@ -12,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rb;
     float x, y;
     float drive;
+    float startSoundVolume;
     bool isMoving;
 
     // Start is called before the first frame update
@@ -28,9 +32,20 @@ public class PlayerMove : MonoBehaviour
         drive = translationModuleOn ? Input.GetAxis("Drive") : 0;
 
         if (drive != 0)
+        {
+            if (!moveSoundSource.isPlaying)
+                StartCoroutine(moveSoundSequence());
+            startSoundVolume = moveSoundSource.volume;
             isMoving = true;
+        }
         else
+        {
+            if (moveSoundSource.isPlaying)
+            {
+                StartCoroutine(soundFadeout());
+            }
             isMoving = false;
+        }
     }
 
     void FixedUpdate()
@@ -53,5 +68,29 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(rb.transform.forward * drive * moveSpeed, ForceMode.Impulse);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, lookRot, Time.deltaTime * rotationSpeed));
         }
+    }
+
+    IEnumerator moveSoundSequence()
+    {
+        moveSoundSource.volume = 0.5f;
+        moveSoundSource.PlayOneShot(startMoveSound);
+        yield return new WaitForSeconds(startMoveSound.length);
+        moveSoundSource.Play();
+        moveSoundSource.loop = true;
+    }
+
+    IEnumerator soundFadeout()
+    {
+        float startVolume = moveSoundSource.volume;
+        while (moveSoundSource.volume > 0)
+        {
+            moveSoundSource.volume -= startVolume * Time.deltaTime;
+            yield return null;
+        }
+
+        print("stopping sound");
+
+        moveSoundSource.volume = 0;
+        moveSoundSource.Stop();
     }
 }
