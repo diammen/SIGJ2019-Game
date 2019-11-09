@@ -5,17 +5,17 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform followTarget;
+    public Vector3 offset;
     public float smoothTime;
     public float rotationSpeed;
 
-    Vector3 offset;
     Vector3 velocity;
     float x;
     
     // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position;
+
     }
 
     // Update is called once per frame

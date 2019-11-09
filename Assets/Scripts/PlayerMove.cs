@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -43,7 +43,6 @@ public class PlayerMove : MonoBehaviour
             cameraRight.y = 0;
             cameraForward.Normalize();
             cameraRight.Normalize();
-
 
             Vector3 moveDir = cameraForward * y + cameraRight * x;
             Quaternion lookRot = rb.rotation;
