@@ -8,6 +8,7 @@ public class PlayerThrow : MonoBehaviour
     public Transform spawner;
     public float throwforce;
     public bool canThrow = true;
+    public bool canPickUp = false;
   //  private bool canThrow = true;
 
     // Start is called before the first frame update
@@ -30,18 +31,21 @@ public class PlayerThrow : MonoBehaviour
                 bullet.transform.parent = null;
                 bullet = null;
             }
+        }
+        if (canPickUp)
+        {
             if (bullet != null && Input.GetButtonDown("Drop"))
             {
                 bullet.gameObject.SetActive(true);
                 bullet.transform.parent = null;
                 bullet = null;
             }
-        }
 
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (canThrow)
+        if (canPickUp)
         {
             if (!bullet && collision.gameObject.tag == "PickUp")
             {
