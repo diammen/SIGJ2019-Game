@@ -7,6 +7,7 @@ public class PlayerFireBullet : MonoBehaviour
     public GameObject bullet;
     public Transform spawner;
     public float bulletSpeed;
+    public bool canThrow = true;
   //  private bool canThrow = true;
 
     // Start is called before the first frame update
@@ -19,27 +20,32 @@ public class PlayerFireBullet : MonoBehaviour
     void Update()
     {
         //Hold down the button and charge up your shot.
-
-        //Release the button and fire
-        if (bullet != null && Input.GetAxis("Throw") > 0.5)
+        if (canThrow)
         {
-            bullet.gameObject.SetActive(true);
-            GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
-            
-            spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
-            Destroy(bullet);
-            bullet = null;
+            //Release the button and fire
+            if (bullet != null && Input.GetAxis("Throw") > 0.5)
+            {
+                bullet.gameObject.SetActive(true);
+                GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
+
+                spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
+                Destroy(bullet);
+                bullet = null;
+            }
         }
 
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(!bullet && collision.gameObject.tag == "PickUp")
+        if (canThrow)
         {
-            bullet = collision.gameObject;
+            if (!bullet && collision.gameObject.tag == "PickUp")
+            {
+                bullet = collision.gameObject;
 
-            collision.gameObject.SetActive(false);
-            
+                collision.gameObject.SetActive(false);
+
+            }
         }
     }
 }
