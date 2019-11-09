@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (!soundFading)
+            if (!soundFading && moveSoundSource.isPlaying)
             {
                 StartCoroutine(soundFadeout());
             }
