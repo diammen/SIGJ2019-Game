@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 657904593821606589}
   - component: {fileID: 657904593821606590}
   - component: {fileID: 657904593821606591}
+  - component: {fileID: 209997633995761302}
   - component: {fileID: 657904593821606584}
   - component: {fileID: 657904593821606588}
+  - component: {fileID: 1726321805}
+  - component: {fileID: 1726321810}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -98,6 +101,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &209997633995761302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657904593821606586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7421bb15cb27145ac6b96c34146159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &657904593821606584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -130,6 +145,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1726321805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657904593821606586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7598220c91d551741b1d2a45a6dc75dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  rotationSpeed: 7
+  translationModuleOn: 0
+  rotationModuleOn: 0
+--- !u!114 &1726321810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657904593821606586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbfdab0d6e1c92c409c89ab7bf67667a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  spawner: {fileID: 0}
+  bulletSpeed: 0
+  canThrow: 1
 --- !u!1 &740179865855460005
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,8 +186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 188849321893232956}
-  - component: {fileID: 69574968}
-  - component: {fileID: 69574969}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -163,37 +208,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &69574968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740179865855460005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbfdab0d6e1c92c409c89ab7bf67667a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  spawner: {fileID: 0}
-  bulletSpeed: 0
---- !u!114 &69574969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740179865855460005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7598220c91d551741b1d2a45a6dc75dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  rotationSpeed: 7
-  translationModuleOn: 0
-  rotationModuleOn: 1
 --- !u!1 &6903776803752530504
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6903776803752530504}
   m_LocalRotation: {x: -0.2807991, y: -0.0042006113, z: 0.014355869, w: 0.95965004}
-  m_LocalPosition: {x: -0.011, y: 0.378, z: 0.59800005}
+  m_LocalPosition: {x: -0.02, y: 0.78, z: 1.21}
   m_LocalScale: {x: 0.26571, y: 0.26571, z: 1.4495013}
   m_Children: []
   m_Father: {fileID: 657904595507444630}

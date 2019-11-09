@@ -1,0 +1,26 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ActivateMods : MonoBehaviour
+{
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Module")
+        {
+            if (collision.gameObject.name == "ActivateRotation")
+            {
+                GetComponent<PlayerMove>().rotationModuleOn = true;
+            }
+            else if(collision.gameObject.name == "ActivateTranslation")
+            {
+                GetComponent<PlayerMove>().translationModuleOn = true;
+            }
+            else if(collision.gameObject.name == "ActivateThrow")
+            {
+                GetComponent<PlayerFireBullet>().canThrow = true;
+            }
+            Destroy(collision.gameObject);
+        }
+    }
+}
