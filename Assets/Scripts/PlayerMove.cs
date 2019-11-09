@@ -37,13 +37,21 @@ public class PlayerMove : MonoBehaviour
     {
         if (isMoving)
         {
-            Vector3 lookVec = new Vector3(x, 0, y);
+            Vector3 cameraForward = Camera.main.transform.forward;
+            Vector3 cameraRight = Camera.main.transform.right;
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+
+            Vector3 moveDir = cameraForward * y + cameraRight * x;
             Quaternion lookRot = rb.rotation;
 
-            if (lookVec != Vector3.zero)
-                lookRot = Quaternion.LookRotation(lookVec, rb.transform.up);
+            if (moveDir != Vector3.zero)
+                lookRot = Quaternion.LookRotation(moveDir, rb.transform.up);
 
-            rb.AddForce(Camera.main.transform.forward * drive * moveSpeed, ForceMode.Impulse);
+            rb.AddForce(rb.transform.forward * drive * moveSpeed, ForceMode.Impulse);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, lookRot, Time.deltaTime * rotationSpeed));
         }
     }
