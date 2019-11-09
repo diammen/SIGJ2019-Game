@@ -20,7 +20,7 @@ public class PlayerFireBullet : MonoBehaviour
         //Hold down the button and charge up your shot.
 
         //Release the button and fire
-        if (Input.GetButtonUp("Fire1"))
+        if (bullet != null && Input.GetButtonDown("Fire1"))
         {
             GameObject spawnedBullet = Instantiate(bullet, spawner.position, spawner.rotation);
             spawnedBullet.GetComponent<Rigidbody>().velocity = spawner.transform.forward * bulletSpeed;
