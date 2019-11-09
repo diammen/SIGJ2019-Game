@@ -44,7 +44,6 @@ public class PlayerMove : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-
             Vector3 moveDir = cameraForward * y + cameraRight * x;
             Quaternion lookRot = rb.rotation;
 
