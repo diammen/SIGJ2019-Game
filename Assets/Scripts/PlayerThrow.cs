@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerThrow : MonoBehaviour
 {
-    public GameObject bullet;
+    public GameObject pickup;
     public Transform spawner;
+    public AudioSource source;
+    public AudioClip pickupSound, throwSound;
     public float throwforce;
     public bool canThrow = true;
     public bool canPickUp = false;
-  //  private bool canThrow = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,21 +25,22 @@ public class PlayerThrow : MonoBehaviour
         if (canThrow)
         {
             //Release the button and fire
-            if (bullet != null && Input.GetAxis("Throw") > 0.5)
+            if (pickup != null && Input.GetAxis("Throw") > 0.5)
             {
-                bullet.gameObject.SetActive(true);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * throwforce, ForceMode.Impulse);
-                bullet.transform.parent = null;
-                bullet = null;
+                source.PlayOneShot(throwSound);
+                pickup.gameObject.SetActive(true);
+                pickup.GetComponent<Rigidbody>().AddForce(transform.forward * throwforce, ForceMode.Impulse);
+                pickup.transform.parent = null;
+                pickup = null;
             }
         }
         if (canPickUp)
         {
-            if (bullet != null && Input.GetButtonDown("Drop"))
+            if (pickup != null && Input.GetButtonDown("Drop"))
             {
-                bullet.gameObject.SetActive(true);
-                bullet.transform.parent = null;
-                bullet = null;
+                pickup.gameObject.SetActive(true);
+                pickup.transform.parent = null;
+                pickup = null;
             }
 
         }
@@ -47,13 +49,14 @@ public class PlayerThrow : MonoBehaviour
     {
         if (canPickUp)
         {
-            if (!bullet && collision.gameObject.tag == "PickUp")
+            if (!pickup && collision.gameObject.tag == "PickUp")
             {
-                bullet = collision.gameObject;
-                bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                bullet.transform.parent = transform;
-                bullet.transform.position = spawner.position;
-                bullet.transform.rotation = spawner.rotation;
+                source.PlayOneShot(pickupSound);
+                pickup = collision.gameObject;
+                pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                pickup.transform.parent = transform;
+                pickup.transform.position = spawner.position;
+                pickup.transform.rotation = spawner.rotation;
 
                 collision.gameObject.SetActive(false);
 
