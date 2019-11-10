@@ -11,12 +11,6 @@ public class ActivateMods : MonoBehaviour
     public AudioClip memoryModulePickup;
     public PlayableDirector director;
 
-    WaitForSeconds waitForJingle;
-
-    private void Start()
-    {
-        waitForJingle = new WaitForSeconds(memoryModulePickup.length);
-    }
     public Text dialogue;
     public string[] displayText;
 
@@ -25,10 +19,14 @@ public class ActivateMods : MonoBehaviour
     private float countTime = 0.0f;
     private bool timerOn = false;
 
+
+    WaitForSeconds waitForJingle;
+
     private void Start()
     {
-
+        waitForJingle = new WaitForSeconds(memoryModulePickup.length);
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -104,12 +102,13 @@ public class ActivateMods : MonoBehaviour
             dialogue.text = displayText[1];
         }
 
-        IEnumerator WaitForJingle()
-        {
-            yield return waitForJingle;
-            director.Play();
-            Time.timeScale = 0;
 
-        }
+    }
+    IEnumerator WaitForJingle()
+    {
+        yield return waitForJingle;
+        director.Play();
+        Time.timeScale = 0;
+
     }
 }
