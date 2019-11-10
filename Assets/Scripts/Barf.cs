@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Barf : MonoBehaviour
 {
+    public ParticleSystem barf;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,10 @@ public class Barf : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void Barfing()
+    {
+        barf.Play();
     }
 }
