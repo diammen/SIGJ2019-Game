@@ -1771,5 +1771,25 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1516810501}
+    - target: {fileID: 138267057, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+      propertyPath: dropSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8272949d8d057e14da029eca0a67e0f0, type: 3}
+    - target: {fileID: 138267057, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+      propertyPath: errorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ff1249719b086b94aa1f7f3023925947, type: 3}
+    - target: {fileID: 138267057, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+      propertyPath: throwforce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 138267058, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+      propertyPath: errorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ff1249719b086b94aa1f7f3023925947, type: 3}
+    - target: {fileID: 138267058, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
+      propertyPath: translationModuleOn
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b157a960d6edb341805c9fd9522477f, type: 3}
