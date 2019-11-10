@@ -98,7 +98,7 @@ public class PlayerThrow : MonoBehaviour
         {
             pickup.GetComponent<Rigidbody>().isKinematic = false;
             pickup.GetComponent<Collider>().enabled = true;
-            pickup.GetComponent<Rigidbody>().AddForce(transform.up + transform.forward * throwforce, ForceMode.Impulse);
+            pickup.GetComponent<Rigidbody>().AddForce(transform.up * 3 + transform.forward * throwforce, ForceMode.Impulse);
             pickup.transform.parent = null;
             pickup = null;
         }
