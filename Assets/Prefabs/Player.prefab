@@ -140,8 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb600e50d704374b8ba5374c834f5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memoryMusic: {fileID: 8300000, guid: 38e09fb0f2ac141479acc48fe1627b29, type: 3}
-  endingMusic: {fileID: 8300000, guid: 6ea5859c1b05e85469921187938e1fa3, type: 3}
 --- !u!1 &740179865855460005
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +213,8 @@ MonoBehaviour:
   dropSound: {fileID: 8300000, guid: 8272949d8d057e14da029eca0a67e0f0, type: 3}
   errorSound: {fileID: 8300000, guid: 09f89a2c4a65c274c86dc72a1acad446, type: 3}
   throwforce: 30
-  canThrow: 1
-  canPickUp: 1
+  canThrow: 0
+  canPickUp: 0
 --- !u!114 &138267058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +233,7 @@ MonoBehaviour:
   moveSpeed: 1
   rotationSpeed: 5
   translationModuleOn: 1
-  rotationModuleOn: 1
+  rotationModuleOn: 0
 --- !u!82 &138267061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -349,7 +347,9 @@ MonoBehaviour:
   memoryModulePickup: {fileID: 8300000, guid: 8d3c7f9061c98c5429ac653d91b99a97, type: 3}
   director: {fileID: 0}
   dialogue: {fileID: 0}
-  displayText: []
+  displayText:
+  - 
+  - 
   lastingTime: 10
 --- !u!1 &1877743656610841087
 GameObject:
@@ -706,6 +706,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1121384304544188636, guid: 31a3e2814e90e6d4fb776c09796125bf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713100914699417448, guid: 31a3e2814e90e6d4fb776c09796125bf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8733914862416510386, guid: 31a3e2814e90e6d4fb776c09796125bf,
         type: 3}

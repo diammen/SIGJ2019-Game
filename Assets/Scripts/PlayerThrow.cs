@@ -87,7 +87,6 @@ public class PlayerThrow : MonoBehaviour
             pickup.GetComponent<Collider>().enabled = false;
             pickup.transform.parent = spawner.transform;
             pickup.transform.position = spawner.position;
-            pickup.transform.rotation = spawner.rotation;
         }
         carryingPickup = true;
     }
