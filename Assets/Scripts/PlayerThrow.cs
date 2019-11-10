@@ -54,7 +54,7 @@ public class PlayerThrow : MonoBehaviour
     {
         if (canPickUp)
         {
-            if (!pickup && collision.gameObject.tag == "PickUp")
+            if (!pickup && (collision.gameObject.tag == "PickUp" || collision.gameObject.tag == "Plate"))
             {
                 source.PlayOneShot(pickupSound);
                 pickup = collision.gameObject;
