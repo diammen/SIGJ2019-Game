@@ -34,7 +34,7 @@ public class PlayerThrow : MonoBehaviour
                 pickup = null;
             }
         }
-        else if (!canThrow && Input.GetAxis("Throw") != 0)
+        else if (!source.isPlaying && !canThrow && Input.GetAxis("Throw") != 0)
         {
             source.PlayOneShot(errorSound);
         }
@@ -67,7 +67,7 @@ public class PlayerThrow : MonoBehaviour
 
             }
         }
-        else
+        else if (!source.isPlaying)
         {
             source.PlayOneShot(errorSound);
         }
