@@ -6,6 +6,7 @@ public class DiningRoomController : MonoBehaviour
 {
     public GameObject[] plates;
     public int platesLeft;
+    public GameObject floatingPlatform;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class DiningRoomController : MonoBehaviour
     {
         if(platesLeft == 0)
         {
-            Debug.Log("DONE");
+            Destroy(floatingPlatform);
         }
     }
 
