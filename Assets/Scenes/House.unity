@@ -2563,8 +2563,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9837205, y: 1.0143648, z: 1.672579}
-  m_Center: {x: -1.4999999, y: 0.45938697, z: -0.85}
+  m_Size: {x: 2.9837208, y: 0.6527765, z: 1.6725789}
+  m_Center: {x: -1.4999999, y: 0.64018124, z: -0.84999996}
 --- !u!1 &501336392
 GameObject:
   m_ObjectHideFlags: 0
@@ -5469,8 +5469,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9837205, y: 1.0143648, z: 1.672579}
-  m_Center: {x: -1.4999999, y: 0.45938697, z: -0.85}
+  m_Size: {x: 2.9837208, y: 0.6106627, z: 1.6725789}
+  m_Center: {x: -1.4999999, y: 0.66123813, z: -0.84999996}
 --- !u!23 &1041318703
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11278,7 +11278,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dca5871ceb43142a6fad93351259db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  memoryModulePickup: {fileID: 8300000, guid: 1b37c03b1a7d9dc43a2525b496ab2bac, type: 3}
-  director: {fileID: 1749343824}
   mainMenu: StartMenuScene
