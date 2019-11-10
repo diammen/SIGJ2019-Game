@@ -214,7 +214,7 @@ MonoBehaviour:
   throwSound: {fileID: 8300000, guid: 747a58a73c0b42848aef4c08ec481e8c, type: 3}
   dropSound: {fileID: 8300000, guid: 8272949d8d057e14da029eca0a67e0f0, type: 3}
   errorSound: {fileID: 8300000, guid: 09f89a2c4a65c274c86dc72a1acad446, type: 3}
-  throwforce: 20
+  throwforce: 30
   canThrow: 1
   canPickUp: 1
 --- !u!114 &138267058
