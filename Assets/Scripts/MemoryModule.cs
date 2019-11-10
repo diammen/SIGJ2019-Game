@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MemoryModule : MonoBehaviour
 {
+    //This is basically a win condition
+
     // Start is called before the first frame update
     void Start()
     {
