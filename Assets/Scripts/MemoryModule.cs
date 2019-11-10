@@ -8,7 +8,7 @@ public class MemoryModule : MonoBehaviour
 {
     //This is basically a win condition
     //Upon collecting this, go to menu
-    public string mainMenu;
+    public string cutscene;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class MemoryModule : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(mainMenu);
+            SceneManager.LoadScene(cutscene);
         }
     }
 }
