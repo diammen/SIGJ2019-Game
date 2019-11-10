@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public AudioSource moveSoundSource, errorSoundSource;
-    public AudioClip startMoveSound;
-    public AudioClip loopMoveSound;
     public AudioClip errorSound;
     public float moveSpeed;
     public float rotationSpeed;
@@ -56,6 +54,7 @@ public class PlayerMove : MonoBehaviour
             //}
             if (moveSoundSource.isPlaying)
             {
+                moveSoundSource.volume = 0;
                 moveSoundSource.Stop();
             }
             isMoving = false;
@@ -86,9 +85,27 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator moveSoundSequence()
     {
-        moveSoundSource.volume = 1;
-        moveSoundSource.PlayOneShot(startMoveSound);
-        yield return new WaitForSeconds(startMoveSound.length);
         moveSoundSource.Play();
+        while (moveSoundSource.volume < 1)
+        {
+            moveSoundSource.volume += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator soundFadeout()
+    {
+        soundFading = true;
+        Debug.Log("fading sound");
+        float startVolume = moveSoundSource.volume;
+        while (moveSoundSource.volume > 0)
+        {
+            moveSoundSource.volume -= startVolume * Time.deltaTime;
+            yield return null;
+        }
+
+        moveSoundSource.volume = 0;
+        moveSoundSource.Stop();
+        soundFading = false;
     }
 }
