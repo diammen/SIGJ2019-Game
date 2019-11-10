@@ -43,7 +43,7 @@ public class PlayerThrow : MonoBehaviour
         {
             if (!carryingPickup && cachedPickup != null && pickup == null && Input.GetButtonDown("Drop"))
             {
-                anim.SetTrigger("Pickup");
+                anim.SetBool("Pickup", true);
             }
             else if (Input.GetButtonDown("Drop") && pickup != null)
             {
@@ -51,6 +51,7 @@ public class PlayerThrow : MonoBehaviour
             }
             else if (pickup == null && carryingPickup)
             {
+                anim.SetBool("Pickup", false);
                 carryingPickup = false;
             }
         }
