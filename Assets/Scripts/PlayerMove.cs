@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     public bool rotationModuleOn;
 
     Rigidbody rb;
+    Animator anim;
     float x, y;
     float drive;
     bool isMoving;
@@ -19,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class PlayerMove : MonoBehaviour
             if (!moveSoundSource.isPlaying)
                 StartCoroutine(moveSoundSequence());
             isMoving = true;
+            anim.SetBool("Moving", true);
         }
         else
         {
@@ -52,6 +55,7 @@ public class PlayerMove : MonoBehaviour
                 moveSoundSource.Stop();
             }
             isMoving = false;
+            anim.SetBool("Moving", false);
         }
     }
 
