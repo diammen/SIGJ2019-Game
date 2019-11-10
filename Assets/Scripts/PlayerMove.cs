@@ -91,20 +91,4 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(startMoveSound.length);
         moveSoundSource.Play();
     }
-
-    IEnumerator soundFadeout()
-    {
-        soundFading = true;
-        Debug.Log("fading sound");
-        float startVolume = moveSoundSource.volume;
-        while (moveSoundSource.volume > 0)
-        {
-            moveSoundSource.volume -= startVolume * Time.deltaTime;
-            yield return null;
-        }
-
-        moveSoundSource.volume = 0;
-        moveSoundSource.Stop();
-        soundFading = false;
-    }
 }
