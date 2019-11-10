@@ -33,14 +33,14 @@ public class MemoryModule : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(mainMenu);
+            StartCoroutine(WaitForJingle());
         }
     }
 
     private IEnumerator WaitForJingle()
     {
-        yield return waitForJingle;
         director.Play();
+        yield return null;
         Time.timeScale = 0;
     }
 }
