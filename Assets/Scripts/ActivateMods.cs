@@ -40,9 +40,9 @@ public class ActivateMods : MonoBehaviour
             if (collision.gameObject.name == "ActivateRotation")
             {
                 GetComponent<PlayerMove>().rotationModuleOn = true;
-                //displayText[0] = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
+                displayText[0] = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
 
-                //displayText[1] = "Why is my rotation module on the floor... \n never mind. I wonder what my humans are up to in the living room?";
+                displayText[1] = "Why is my rotation module on the floor... \n never mind. I wonder what my humans are up to in the living room?";
 
 
             }

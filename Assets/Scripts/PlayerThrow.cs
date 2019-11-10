@@ -19,7 +19,7 @@ public class PlayerThrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -29,13 +29,10 @@ public class PlayerThrow : MonoBehaviour
         if (canThrow)
         {
             //Release the button and fire
-            if (pickup != null && Input.GetAxis("Throw") > 0.5)
+            if (pickup != null && Input.GetAxis("Throw") == 1)
             {
-                source.PlayOneShot(throwSound);
-                pickup.gameObject.SetActive(true);
-                pickup.GetComponent<Rigidbody>().AddForce(transform.up + transform.forward * throwforce, ForceMode.Impulse);
-                pickup.transform.parent = null;
-                pickup = null;
+                print("throw");
+                anim.SetTrigger("Throw");
             }
         }
         else if (!source.isPlaying && !canThrow && carryingPickup && Input.GetAxis("Throw") != 0)
@@ -46,15 +43,11 @@ public class PlayerThrow : MonoBehaviour
         {
             if (!carryingPickup && cachedPickup != null && pickup == null && Input.GetButtonDown("Drop"))
             {
-                GrabPickup();
+                anim.SetTrigger("Pickup");
             }
             else if (Input.GetButtonDown("Drop") && pickup != null)
             {
-                source.PlayOneShot(dropSound);
-                pickup.gameObject.SetActive(true);
-                pickup.transform.parent = null;
-                pickup = null;
-                cachedPickup = null;
+                anim.SetTrigger("Drop");
             }
             else if (pickup == null && carryingPickup)
             {
@@ -82,16 +75,45 @@ public class PlayerThrow : MonoBehaviour
         cachedPickup = null;
     }
 
-    private void GrabPickup()
+    public void GrabPickup()
     {
         source.PlayOneShot(pickupSound);
         pickup = cachedPickup;
-        pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        pickup.transform.parent = transform;
-        pickup.transform.position = spawner.position;
-        pickup.transform.rotation = spawner.rotation;
-        pickup.SetActive(false);
-
+        if (pickup != null)
+        {
+            pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            pickup.GetComponent<Rigidbody>().isKinematic = true;
+            pickup.GetComponent<Collider>().enabled = false;
+            pickup.transform.parent = spawner.transform;
+            pickup.transform.position = spawner.position;
+            pickup.transform.rotation = spawner.rotation;
+        }
         carryingPickup = true;
+    }
+
+    public void ThrowPickup()
+    {
+        source.PlayOneShot(throwSound);
+        if (pickup != null)
+        {
+            pickup.GetComponent<Rigidbody>().isKinematic = false;
+            pickup.GetComponent<Collider>().enabled = true;
+            pickup.GetComponent<Rigidbody>().AddForce(transform.up + transform.forward * throwforce, ForceMode.Impulse);
+            pickup.transform.parent = null;
+            pickup = null;
+        }
+    }
+
+    public void DropPickup()
+    {
+        source.PlayOneShot(dropSound);
+        if (pickup != null)
+        {
+            pickup.GetComponent<Rigidbody>().isKinematic = false;
+            pickup.GetComponent<Collider>().enabled = true;
+            pickup.transform.parent = null;
+            pickup = null;
+            cachedPickup = null;
+        }
     }
 }
