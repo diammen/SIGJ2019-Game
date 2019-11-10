@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public AudioSource moveSoundSource;
+    public AudioSource moveSoundSource, errorSoundSource;
     public AudioClip startMoveSound;
     public AudioClip loopMoveSound;
     public AudioClip errorSound;
@@ -32,14 +32,14 @@ public class PlayerMove : MonoBehaviour
         y = rotationModuleOn ? Input.GetAxis("Vertical") : 0;
         drive = translationModuleOn ? Input.GetAxis("Drive") : 0;
 
-        if (!rotationModuleOn && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        if (!errorSoundSource.isPlaying && !rotationModuleOn && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
-            moveSoundSource.PlayOneShot(errorSound);
+            errorSoundSource.Play();
         }
 
-        if (!translationModuleOn && Input.GetAxis("Drive") != 0)
+        if (!errorSoundSource.isPlaying && Input.GetAxis("Drive") != 0 && !translationModuleOn)
         {
-            moveSoundSource.PlayOneShot(errorSound);
+            errorSoundSource.Play();
         }
 
         if (drive != 0)
@@ -50,9 +50,13 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (!soundFading && moveSoundSource.isPlaying)
+            //if (!soundFading && moveSoundSource.isPlaying)
+            //{
+            //    StartCoroutine(soundFadeout());
+            //}
+            if (moveSoundSource.isPlaying)
             {
-                StartCoroutine(soundFadeout());
+                moveSoundSource.Stop();
             }
             isMoving = false;
         }
@@ -86,7 +90,6 @@ public class PlayerMove : MonoBehaviour
         moveSoundSource.PlayOneShot(startMoveSound);
         yield return new WaitForSeconds(startMoveSound.length);
         moveSoundSource.Play();
-        moveSoundSource.loop = true;
     }
 
     IEnumerator soundFadeout()
@@ -99,8 +102,6 @@ public class PlayerMove : MonoBehaviour
             moveSoundSource.volume -= startVolume * Time.deltaTime;
             yield return null;
         }
-
-        print("stopping sound");
 
         moveSoundSource.volume = 0;
         moveSoundSource.Stop();
