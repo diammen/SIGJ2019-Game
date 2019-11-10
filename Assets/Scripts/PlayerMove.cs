@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     public AudioSource moveSoundSource;
     public AudioClip startMoveSound;
     public AudioClip loopMoveSound;
+    public AudioClip errorSound;
     public float moveSpeed;
     public float rotationSpeed;
     public bool translationModuleOn;
@@ -15,7 +16,6 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rb;
     float x, y;
     float drive;
-    float startSoundVolume;
     bool isMoving;
     bool soundFading = false; 
 
@@ -32,11 +32,20 @@ public class PlayerMove : MonoBehaviour
         y = rotationModuleOn ? Input.GetAxis("Vertical") : 0;
         drive = translationModuleOn ? Input.GetAxis("Drive") : 0;
 
+        if (!rotationModuleOn && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        {
+            moveSoundSource.PlayOneShot(errorSound);
+        }
+
+        if (!translationModuleOn && Input.GetAxis("Drive") != 0)
+        {
+            moveSoundSource.PlayOneShot(errorSound);
+        }
+
         if (drive != 0)
         {
             if (!moveSoundSource.isPlaying)
                 StartCoroutine(moveSoundSequence());
-            startSoundVolume = moveSoundSource.volume;
             isMoving = true;
         }
         else

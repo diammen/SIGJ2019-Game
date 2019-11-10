@@ -7,7 +7,7 @@ public class PlayerThrow : MonoBehaviour
     public GameObject pickup;
     public Transform spawner;
     public AudioSource source;
-    public AudioClip pickupSound, throwSound;
+    public AudioClip pickupSound, throwSound, dropSound, errorSound;
     public float throwforce;
     public bool canThrow = true;
     public bool canPickUp = false;
@@ -34,10 +34,15 @@ public class PlayerThrow : MonoBehaviour
                 pickup = null;
             }
         }
+        else if (!canThrow && Input.GetAxis("Throw") != 0)
+        {
+            source.PlayOneShot(errorSound);
+        }
         if (canPickUp)
         {
             if (pickup != null && Input.GetButtonDown("Drop"))
             {
+                source.PlayOneShot(dropSound);
                 pickup.gameObject.SetActive(true);
                 pickup.transform.parent = null;
                 pickup = null;
@@ -61,6 +66,10 @@ public class PlayerThrow : MonoBehaviour
                 collision.gameObject.SetActive(false);
 
             }
+        }
+        else
+        {
+            source.PlayOneShot(errorSound);
         }
     }
 }
