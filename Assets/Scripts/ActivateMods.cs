@@ -23,6 +23,10 @@ public class ActivateMods : MonoBehaviour
             {
                 GetComponent<PlayerThrow>().canThrow = true;
             }
+            else if (collision.gameObject.name == "ActivatePickUp")
+            {
+                GetComponent<PlayerThrow>().canPickUp = true;
+            }
             Destroy(collision.gameObject);
         }
     }

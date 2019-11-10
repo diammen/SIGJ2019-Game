@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) { pause(); }
+        if (Input.GetButtonDown("Start")) { pause(); }
 
     }
 

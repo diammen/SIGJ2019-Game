@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public AudioSource moveSoundSource, errorSoundSource;
+    public AudioClip errorSound;
     public float moveSpeed;
     public float rotationSpeed;
     public bool translationModuleOn;
@@ -13,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     float x, y;
     float drive;
     bool isMoving;
+    bool soundFading = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +30,35 @@ public class PlayerMove : MonoBehaviour
         y = rotationModuleOn ? Input.GetAxis("Vertical") : 0;
         drive = translationModuleOn ? Input.GetAxis("Drive") : 0;
 
+        if (!errorSoundSource.isPlaying && !rotationModuleOn && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        {
+            errorSoundSource.Play();
+        }
+
+        if (!errorSoundSource.isPlaying && Input.GetAxis("Drive") != 0 && !translationModuleOn)
+        {
+            errorSoundSource.Play();
+        }
+
         if (drive != 0)
+        {
+            if (!moveSoundSource.isPlaying)
+                StartCoroutine(moveSoundSequence());
             isMoving = true;
+        }
         else
+        {
+            //if (!soundFading && moveSoundSource.isPlaying)
+            //{
+            //    StartCoroutine(soundFadeout());
+            //}
+            if (moveSoundSource.isPlaying)
+            {
+                moveSoundSource.volume = 0;
+                moveSoundSource.Stop();
+            }
             isMoving = false;
+        }
     }
 
     void FixedUpdate()
@@ -53,5 +81,31 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(rb.transform.forward * drive * moveSpeed, ForceMode.Impulse);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, lookRot, Time.deltaTime * rotationSpeed));
         }
+    }
+
+    IEnumerator moveSoundSequence()
+    {
+        moveSoundSource.Play();
+        while (moveSoundSource.volume < 1)
+        {
+            moveSoundSource.volume += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator soundFadeout()
+    {
+        soundFading = true;
+        Debug.Log("fading sound");
+        float startVolume = moveSoundSource.volume;
+        while (moveSoundSource.volume > 0)
+        {
+            moveSoundSource.volume -= startVolume * Time.deltaTime;
+            yield return null;
+        }
+
+        moveSoundSource.volume = 0;
+        moveSoundSource.Stop();
+        soundFading = false;
     }
 }
