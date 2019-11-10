@@ -12,6 +12,9 @@ public class PlayerThrow : MonoBehaviour
     public bool canThrow = true;
     public bool canPickUp = false;
 
+    GameObject cachedPickup;
+    bool carryingPickup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,42 +37,60 @@ public class PlayerThrow : MonoBehaviour
                 pickup = null;
             }
         }
-        else if (!source.isPlaying && !canThrow && Input.GetAxis("Throw") != 0)
+        else if (!source.isPlaying && !canThrow && carryingPickup && Input.GetAxis("Throw") != 0)
         {
             source.PlayOneShot(errorSound);
         }
         if (canPickUp)
         {
-            if (pickup != null && Input.GetButtonDown("Drop"))
+            if (!carryingPickup && cachedPickup != null && pickup == null && Input.GetButtonDown("Drop"))
             {
-                print("drop");
+                GrabPickup();
+            }
+            else if (Input.GetButtonDown("Drop") && pickup != null)
+            {
                 source.PlayOneShot(dropSound);
                 pickup.gameObject.SetActive(true);
                 pickup.transform.parent = null;
                 pickup = null;
+                cachedPickup = null;
             }
-        }
-    }
-    private void OnTriggerStay(Collider collision)
-    {
-        if (canPickUp)
-        {
-            if (!pickup && Input.GetButtonDown("Drop") && (collision.gameObject.tag == "PickUp" || collision.gameObject.tag == "Plate") )
+            else if (pickup == null && carryingPickup)
             {
-                source.PlayOneShot(pickupSound);
-                pickup = collision.gameObject;
-                pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                pickup.transform.parent = transform;
-                pickup.transform.position = spawner.position;
-                pickup.transform.rotation = spawner.rotation;
-
-                collision.gameObject.SetActive(false);
-
+                carryingPickup = false;
             }
         }
-        else if (!source.isPlaying)
+        else if (Input.GetButtonDown("Drop") && !source.isPlaying)
         {
             source.PlayOneShot(errorSound);
         }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (canPickUp)
+        {
+            if (collision.gameObject.tag == "PickUp" || collision.gameObject.tag == "Plate" )
+            {
+                cachedPickup = collision.gameObject;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        cachedPickup = null;
+    }
+
+    private void GrabPickup()
+    {
+        source.PlayOneShot(pickupSound);
+        pickup = cachedPickup;
+        pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        pickup.transform.parent = transform;
+        pickup.transform.position = spawner.position;
+        pickup.transform.rotation = spawner.rotation;
+        pickup.SetActive(false);
+
+        carryingPickup = true;
     }
 }
