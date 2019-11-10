@@ -9,11 +9,17 @@ public class ActivateMods : MonoBehaviour
     public AudioClip eatModuleSound;
     public AudioClip memoryModulePickup;
     public Text dialogue;
+    public string[] displayText;
 
     //Timer Scripts for the text.
     public float lastingTime = 10.0f;
     private float countTime = 0.0f;
     private bool timerOn = false;
+
+    private void Start()
+    {
+        
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,11 +31,11 @@ public class ActivateMods : MonoBehaviour
             if (collision.gameObject.name == "ActivateRotation")
             {
                 GetComponent<PlayerMove>().rotationModuleOn = true;
-                dialogue.text = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
-                if(countTime >= lastingTime /2)
-                {
-                    dialogue.text = "Why is my rotation module on the floor... never mind. I wonder what my humans are up to in the living room?";
-                }
+                displayText[0] = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
+           
+                displayText[1] = "Why is my rotation module on the floor... \n never mind. I wonder what my humans are up to in the living room?";
+                
+
             }
             else if(collision.gameObject.name == "ActivateTranslation")
             {
@@ -38,21 +44,19 @@ public class ActivateMods : MonoBehaviour
             else if(collision.gameObject.name == "ActivateThrow")
             {
                 GetComponent<PlayerThrow>().canThrow = true;
-                dialogue.text = "THROW MODULE ACTIVATED (A to throw after picking up objects)";
-                if (countTime >= lastingTime / 2)
-                {
-                    dialogue.text = "Strange... I really hope my humans are OK. I hope Alex is ok. I'll go check up on them.";
-                }
+                displayText[0] = "THROW MODULE ACTIVATED (A to throw after picking up objects)";
+               
+                displayText[1] = "Strange... I really hope my humans are OK. \n I hope Alex is ok. I'll go check up on them.";
+                
             }
             else if (collision.gameObject.name == "ActivatePickUp")
             {
                 GetComponent<PlayerThrow>().canPickUp = true;
 
-                dialogue.text = "PICK UP MODULE ACTIVATED (B to pick up/drop)";
-                if (countTime >= lastingTime / 2)
-                {
-                    dialogue.text = "What's my pick up module doing here? Something's not right, but I should still cook dinner for my humans.";
-                }
+                displayText[0] = "PICK UP MODULE ACTIVATED (B to pick up/drop)";
+                
+                displayText[1] = "What's my pick up module doing here? \n Something's not right, but I should still cook dinner for my humans.";
+                
             }
             Destroy(collision.gameObject);
         }
@@ -68,10 +72,26 @@ public class ActivateMods : MonoBehaviour
         if(timerOn)
         {
             countTime += Time.deltaTime;
+
+            displayDialogue();
+
             if(countTime >= lastingTime)
             {
+
+
                 dialogue.text = " ";
+                countTime = 0.0f;
+                timerOn = false;
             }
+        }
+    }
+
+    void displayDialogue()
+    {
+        dialogue.text = displayText[0];
+        if (countTime >= lastingTime / 2)
+        {
+            dialogue.text = displayText[1];
         }
     }
 }
