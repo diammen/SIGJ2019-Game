@@ -42,19 +42,19 @@ public class PlayerThrow : MonoBehaviour
         {
             if (pickup != null && Input.GetButtonDown("Drop"))
             {
+                print("drop");
                 source.PlayOneShot(dropSound);
                 pickup.gameObject.SetActive(true);
                 pickup.transform.parent = null;
                 pickup = null;
             }
-
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
         if (canPickUp)
         {
-            if (!pickup && (collision.gameObject.tag == "PickUp" || collision.gameObject.tag == "Plate"))
+            if (!pickup && Input.GetButtonDown("Drop") && (collision.gameObject.tag == "PickUp" || collision.gameObject.tag == "Plate") )
             {
                 source.PlayOneShot(pickupSound);
                 pickup = collision.gameObject;
