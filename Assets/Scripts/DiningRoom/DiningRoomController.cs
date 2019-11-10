@@ -12,7 +12,6 @@ public class DiningRoomController : MonoBehaviour
     {
         plates = GameObject.FindGameObjectsWithTag("Plate");
         platesLeft = plates.Length;
-        Debug.Log(platesLeft);
     }
 
     private void Update()

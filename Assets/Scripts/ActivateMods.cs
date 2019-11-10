@@ -19,12 +19,13 @@ public class ActivateMods : MonoBehaviour
     private float countTime = 0.0f;
     private bool timerOn = false;
 
-
+    Animator anim;
     WaitForSeconds waitForJingle;
 
     private void Start()
     {
         waitForJingle = new WaitForSeconds(memoryModulePickup.length);
+        anim = GetComponentInChildren<Animator>();
     }
 
 
@@ -35,12 +36,13 @@ public class ActivateMods : MonoBehaviour
         {
             timerOn = true;
             source.PlayOneShot(eatModuleSound);
+            anim.SetTrigger("EatModule");
             if (collision.gameObject.name == "ActivateRotation")
             {
                 GetComponent<PlayerMove>().rotationModuleOn = true;
-                displayText[0] = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
+                //displayText[0] = "ROTATION MODULE ACTIVATED (Left Stick to rotate)";
 
-                displayText[1] = "Why is my rotation module on the floor... \n never mind. I wonder what my humans are up to in the living room?";
+                //displayText[1] = "Why is my rotation module on the floor... \n never mind. I wonder what my humans are up to in the living room?";
 
 
             }
@@ -70,6 +72,7 @@ public class ActivateMods : MonoBehaviour
         if (collision.gameObject.CompareTag("MemoryModule"))
         {
             source.PlayOneShot(memoryModulePickup);
+            anim.SetTrigger("EatModule");
             StartCoroutine(WaitForJingle());
             collision.gameObject.GetComponent<Renderer>().enabled = false;
         }
@@ -96,11 +99,11 @@ public class ActivateMods : MonoBehaviour
 
     void displayDialogue()
     {
-        dialogue.text = displayText[0];
-        if (countTime >= lastingTime / 2)
-        {
-            dialogue.text = displayText[1];
-        }
+        //dialogue.text = displayText[0];
+        //if (countTime >= lastingTime / 2)
+        //{
+        //    dialogue.text = displayText[1];
+        //}
 
 
     }
