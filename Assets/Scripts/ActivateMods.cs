@@ -6,6 +6,7 @@ public class ActivateMods : MonoBehaviour
 {
     public AudioSource source;
     public AudioClip eatModuleSound;
+    public AudioClip memoryModulePickup;
     private void OnCollisionEnter(Collision collision)
     {
         
@@ -29,6 +30,11 @@ public class ActivateMods : MonoBehaviour
             {
                 GetComponent<PlayerThrow>().canPickUp = true;
             }
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("MemoryModule"))
+        {
+            source.PlayOneShot(memoryModulePickup);
             Destroy(collision.gameObject);
         }
     }

@@ -15,7 +15,6 @@ public class PlayerMove : MonoBehaviour
     float x, y;
     float drive;
     bool isMoving;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +46,6 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            //if (!soundFading && moveSoundSource.isPlaying)
-            //{
-            //    StartCoroutine(soundFadeout());
-            //}
             if (moveSoundSource.isPlaying)
             {
                 moveSoundSource.volume = 0;
@@ -94,7 +89,6 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator soundFadeout()
     {
-        Debug.Log("fading sound");
         float startVolume = moveSoundSource.volume;
         while (moveSoundSource.volume > 0)
         {
