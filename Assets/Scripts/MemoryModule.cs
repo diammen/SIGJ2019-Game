@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MemoryModule : MonoBehaviour
 {
     //This is basically a win condition
-
+    //Upon collecting this, go to menu
+    public string mainMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +18,13 @@ public class MemoryModule : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(mainMenu);
+        }
     }
 }
