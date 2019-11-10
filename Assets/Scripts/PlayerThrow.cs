@@ -13,12 +13,13 @@ public class PlayerThrow : MonoBehaviour
     public bool canPickUp = false;
 
     GameObject cachedPickup;
+    Animator anim;
     bool carryingPickup;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
