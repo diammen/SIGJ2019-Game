@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    public AudioClip memoryMusic;
-    public AudioClip endingMusic;
-
     AudioSource source;
 
     // Start is called before the first frame update
