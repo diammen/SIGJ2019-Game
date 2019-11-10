@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ActivateMods : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip eatModuleSound;
     private void OnCollisionEnter(Collision collision)
     {
         
         if (collision.gameObject.tag == "Module")
         {
-            Debug.Log("Hit");
+            source.PlayOneShot(eatModuleSound);
             if (collision.gameObject.name == "ActivateRotation")
             {
                 GetComponent<PlayerMove>().rotationModuleOn = true;

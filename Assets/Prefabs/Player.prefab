@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7421bb15cb27145ac6b96c34146159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  eatModuleSound: {fileID: 0}
 --- !u!65 &657904593821606584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -167,7 +169,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9ba2bdd188984264ab069c6695789e3d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 070ddabcb8b6b6b4aa683208a96e33e1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -342,11 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSoundSource: {fileID: 610062782}
   errorSoundSource: {fileID: 138267061}
-  startMoveSound: {fileID: 8300000, guid: 19d538f4ee2dc454dbcf3d88edb5542c, type: 3}
-  loopMoveSound: {fileID: 8300000, guid: 9ba2bdd188984264ab069c6695789e3d, type: 3}
   errorSound: {fileID: 8300000, guid: 09f89a2c4a65c274c86dc72a1acad446, type: 3}
   moveSpeed: 1
-  rotationSpeed: 7
+  rotationSpeed: 5
   translationModuleOn: 1
   rotationModuleOn: 1
 --- !u!82 &138267061
@@ -457,6 +457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7421bb15cb27145ac6b96c34146159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 138267061}
+  eatModuleSound: {fileID: 8300000, guid: dbe61a430465b20459c1e73e05c0bce0, type: 3}
 --- !u!1 &6903776803752530504
 GameObject:
   m_ObjectHideFlags: 0
