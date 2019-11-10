@@ -32,7 +32,7 @@ public class PlayerThrow : MonoBehaviour
             {
                 source.PlayOneShot(throwSound);
                 pickup.gameObject.SetActive(true);
-                pickup.GetComponent<Rigidbody>().AddForce(transform.forward * throwforce, ForceMode.Impulse);
+                pickup.GetComponent<Rigidbody>().AddForce(transform.up + transform.forward * throwforce, ForceMode.Impulse);
                 pickup.transform.parent = null;
                 pickup = null;
             }

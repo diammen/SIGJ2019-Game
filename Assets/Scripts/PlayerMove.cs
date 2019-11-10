@@ -12,14 +12,15 @@ public class PlayerMove : MonoBehaviour
     public bool rotationModuleOn;
 
     Rigidbody rb;
+    Animator anim;
     float x, y;
     float drive;
     bool isMoving;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -44,19 +45,17 @@ public class PlayerMove : MonoBehaviour
             if (!moveSoundSource.isPlaying)
                 StartCoroutine(moveSoundSequence());
             isMoving = true;
+            anim.SetBool("Moving", true);
         }
         else
         {
-            //if (!soundFading && moveSoundSource.isPlaying)
-            //{
-            //    StartCoroutine(soundFadeout());
-            //}
             if (moveSoundSource.isPlaying)
             {
                 moveSoundSource.volume = 0;
                 moveSoundSource.Stop();
             }
             isMoving = false;
+            anim.SetBool("Moving", false);
         }
     }
 
@@ -94,7 +93,6 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator soundFadeout()
     {
-        Debug.Log("fading sound");
         float startVolume = moveSoundSource.volume;
         while (moveSoundSource.volume > 0)
         {
