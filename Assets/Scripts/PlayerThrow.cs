@@ -92,6 +92,7 @@ public class PlayerThrow : MonoBehaviour
 
     public void ThrowPickup()
     {
+        anim.ResetTrigger("Throw");
         source.PlayOneShot(throwSound);
         if (pickup != null)
         {
