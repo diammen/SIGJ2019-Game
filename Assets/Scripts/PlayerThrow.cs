@@ -31,7 +31,6 @@ public class PlayerThrow : MonoBehaviour
             //Release the button and fire
             if (pickup != null && Input.GetAxis("Throw") == 1)
             {
-                print("throw");
                 anim.SetTrigger("Throw");
             }
         }
@@ -93,6 +92,7 @@ public class PlayerThrow : MonoBehaviour
 
     public void ThrowPickup()
     {
+        anim.ResetTrigger("Throw");
         source.PlayOneShot(throwSound);
         if (pickup != null)
         {
